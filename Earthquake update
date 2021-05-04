@@ -43,5 +43,5 @@ print("\nIt has a population of", result3['population'], ",and the national lang
 time.sleep(2.5)
 print("The capital of", result3['name'], "is", result3['capital'],".\n")
 time.sleep(2.5)
-print(f"Please click the link below for the national flag of {result3['name']}.\n")
-print(result3['flag'])
+print(f"Please click the link below for more information on {result3['name']}.\n")
+print(f"https://en.wikipedia.org/wiki/{result3['name']}")
