@@ -1,6 +1,7 @@
 import json
 import urllib.request
 import time
+import os #for environment variables
 from os import system, name
 from time import sleep
 def clear():
@@ -24,7 +25,9 @@ long = result['features'][0]['geometry']['coordinates'][0]#longitude
 lat = result['features'][0]['geometry']['coordinates'][1] #latitude
 print("Longitude:", long, "\tLatitude:", lat)
 print(f"\nLink to map of earthquake location:\nhttps://www.purpleair.com/map?opt=1/mAQI/a10/cC0#11/{lat}/{long}")
-url2 = f'http://open.mapquestapi.com/geocoding/v1/reverse?key=FNEbrtHFZoEIAl94Fw1i889wGl8FsKIA&location={lat},{long}&includeRoadMetadata=true&includeNearestIntersection=true'
+my_secret = os.environ['APIkey'] #to hide the free API key
+API_KEY = os.getenv("APIkey") #define environmental variable
+url2 = f'http://open.mapquestapi.com/geocoding/v1/reverse?key={API_KEY}{lat},{long}&includeRoadMetadata=true&includeNearestIntersection=true'
 #long and lat variable inserted into url2
 response2 = urllib.request.urlopen(url2)
 result2 = json.loads(response2.read()) #A second API to obtain country code of earthquake
