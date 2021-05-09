@@ -48,5 +48,5 @@ time.sleep(2.5)
 print("The capital of", result3['name'], "is", result3['capital'] + ".\n")
 time.sleep(2.5)
 print(f"Please click the link below for more information on {result3['name']}.\n")
-country = result3['name'].replace(" ","_")
+country = result3['name'].replace(" ","_") #replace any spaces with underscore
 print(f"https://en.wikipedia.org/wiki/{country}")
