@@ -9,10 +9,14 @@ def clear():
     _ = system('cls')
   else:
     _ = system('clear')
-
-url = f'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson' #data for earthquakes last 7 days magnitude 4.5 or more
-response = urllib.request.urlopen(url)
-result = json.loads(response.read()) #read json in to python
+def API_read(link):
+  '''read API link and return result'''
+  url = f'{link}'
+  response = urllib.request.urlopen(url)
+  result = json.loads(response.read())
+  return result
+link1 = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson' #data for earthquakes last 7 days magnitude 4.5 or more
+result = API_read(link1) #call function
 print("Number of earthquakes on Earth last 168 hours of magnitude 4.5 or higher:",result["metadata"]["count"],"\n")
 time.sleep(2.5)
 print("---------------------------------------------------------------")
@@ -25,18 +29,15 @@ long = result['features'][0]['geometry']['coordinates'][0]#longitude
 lat = result['features'][0]['geometry']['coordinates'][1] #latitude
 print("Longitude:", long, "\tLatitude:", lat)
 print(f"\nLink to map of earthquake location:\nhttps://www.purpleair.com/map?opt=1/mAQI/a10/cC0#11/{lat}/{long}")
-my_secret = os.environ['APIkey'] #to hide the free API key
+my_secret = os.environ['APIkey'] #to hide free API key
 API_KEY = os.getenv("APIkey") #define environmental variable
-url2 = f'http://open.mapquestapi.com/geocoding/v1/reverse?key={API_KEY}{lat},{long}&includeRoadMetadata=true&includeNearestIntersection=true'
-#long and lat variable inserted into url2
-response2 = urllib.request.urlopen(url2)
-result2 = json.loads(response2.read()) #A second API to obtain country code of earthquake
+link2 = f'http://open.mapquestapi.com/geocoding/v1/reverse?key={API_KEY}{lat},{long}&includeRoadMetadata=true&includeNearestIntersection=true' #A second API to obtain country code of earthquake. long and lat variable inserted into link2
+result2 = API_read(link2) #call function
 country_code = result2['results'][0]['locations'][0]['adminArea1']
 print("\nFor more information on this earthquake, please visit:")
 print(quake['url']) #link to USGS website
-url3 = f'https://restcountries.eu/rest/v2/alpha/{country_code}' # API to obtain information of country where the earthquake happened.
-response3 = urllib.request.urlopen(url3)
-result3 = json.loads(response3.read())
+link3 = f'https://restcountries.eu/rest/v2/alpha/{country_code}' # API to obtain information of country where the earthquake happened.
+result3 = API_read(link3) #call function
 print("\nFor more information on", result3['name'],":")
 choice = input("\nPress to continue. ")
 clear() #clear screen
