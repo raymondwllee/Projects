@@ -18,7 +18,7 @@ def API_read(link):
 link1 = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson' #data for earthquakes last 7 days magnitude 4.5 or more
 result = API_read(link1) #call function
 print("Number of earthquakes on Earth last 168 hours of magnitude 4.5 or higher:",result["metadata"]["count"],"\n")
-time.sleep(2.5)
+time.sleep(2.5) #pause
 print("---------------------------------------------------------------")
 quake = result["features"][0]["properties"] #variable to help comprehend complex JSON structure
 print("\nThe most recent earthquake occured on:")
