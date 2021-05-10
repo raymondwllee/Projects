@@ -41,7 +41,7 @@ result3 = API_read(link3) #call function
 print("\nFor more information on", result3['name'] + ":")
 choice = input("\nPress to continue. ")
 clear() #clear screen
-print(result3['name'], ",also known as", result3['altSpellings'][1], ", is located in", result3['subregion'] + ".")
+print(result3['name'] + " is located in", result3['subregion'] + ".")
 time.sleep(2.5)
 print("\nIt has a population of", result3['population'], ",and the national language of", result3['name'], "is", result3['languages'][0]['name'] + ".\n")
 time.sleep(2.5)
