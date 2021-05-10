@@ -36,17 +36,22 @@ result2 = API_read(link2) #call function
 country_code = result2['results'][0]['locations'][0]['adminArea1']
 print("\nFor more information on this earthquake, please visit:")
 print(quake['url']) #link to USGS website
-link3 = f'https://restcountries.eu/rest/v2/alpha/{country_code}' # API to obtain information of country where the earthquake happened.
-result3 = API_read(link3) #call function
-print("\nFor more information on", result3['name'] + ":")
-choice = input("\nPress to continue. ")
-clear() #clear screen
-print(result3['name'] + " is located in", result3['subregion'] + ".")
-time.sleep(2.5)
-print("\nIt has a population of", result3['population'], ",and the national language of", result3['name'], "is", result3['languages'][0]['name'] + ".\n")
-time.sleep(2.5)
-print("The capital of", result3['name'], "is", result3['capital'] + ".\n")
-time.sleep(2.5)
-print(f"Please click the link below for more information on {result3['name']}.\n")
-country = result3['name'].replace(" ","_") #replace any spaces with underscore
-print(f"https://en.wikipedia.org/wiki/{country}")
+if country_code == "XZ":
+  print("\nThis earthquake happened on International Waters.")
+  print("For more info please click link below.")
+  print("https://en.wikipedia.org/wiki/International_waters")
+else:
+  link3 = f'https://restcountries.eu/rest/v2/alpha/{country_code}' # API to obtain information of country where the earthquake happened.
+  result3 = API_read(link3) #call function
+  print("\nFor more information on", result3['name'] + ":")
+  choice = input("\nPress to continue. ")
+  clear() #clear screen
+  print(result3['name'] + " is located in", result3['subregion'] + ".")
+  time.sleep(2.5)
+  print("\nIt has a population of", result3['population'], ",and the national language of", result3['name'], "is", result3['languages'][0]['name'] + ".\n")
+  time.sleep(2.5)
+  print("The capital of", result3['name'], "is", result3['capital'] + ".\n")
+  time.sleep(2.5)
+  print(f"Please click the link below for more information on {result3['name']}.\n")
+  country = result3['name'].replace(" ","_")
+  print(f"https://en.wikipedia.org/wiki/{country}")
