@@ -5,6 +5,7 @@ import os #for environment variables
 from os import system, name
 from time import sleep
 def clear():
+''' clear screen function'''
   if name == 'nt':
     _ = system('cls')
   else:
